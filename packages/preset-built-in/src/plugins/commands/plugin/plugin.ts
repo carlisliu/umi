@@ -1,5 +1,5 @@
 import { IApi } from '@umijs/types';
-import { chalk, lodash } from '@umijs/utils';
+import { chalk } from '@umijs/utils';
 
 export default (api: IApi) => {
   api.registerCommand({
@@ -14,6 +14,15 @@ $ umi plugin list --key
     `.trim(),
     fn({ args }) {
       const command = args._[0];
+      
+      if (!command) {
+        throw new Error(`
+Sub command not found: umi plugin
+Did you mean:
+  umi plugin list
+        `)
+      }
+      
       switch (command) {
         case 'list':
           list();

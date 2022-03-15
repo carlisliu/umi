@@ -1,3 +1,6 @@
+// Config for dumi
+import { defineConfig } from 'umi';
+
 function getMenus(opts: { lang?: string; base: '/docs' | '/plugins' }) {
   const menus = {
     '/plugins': [
@@ -13,20 +16,22 @@ function getMenus(opts: { lang?: string; base: '/docs' | '/plugins' }) {
           '/plugins/plugin-antd',
           '/plugins/plugin-crossorigin',
           '/plugins/plugin-dva',
+          '/plugins/plugin-esbuild',
+          '/plugins/plugin-helmet',
           '/plugins/plugin-initial-state',
           '/plugins/plugin-layout',
           '/plugins/plugin-locale',
           '/plugins/plugin-model',
+          '/plugins/plugin-preact',
           '/plugins/plugin-qiankun',
           '/plugins/plugin-request',
           '/plugins/plugin-sass',
-          '/plugins/plugin-webpack-5',
         ],
       },
       {
         title: 'Plugin Develop',
         'title_zh-CN': '插件开发',
-        children: ['/plugins/api', '/plugins/test'],
+        children: ['/plugins/api', '/plugins/best-practice'],
       },
     ],
     '/docs': [
@@ -53,7 +58,7 @@ function getMenus(opts: { lang?: string; base: '/docs' | '/plugins' }) {
           '/docs/routing',
           '/docs/convention-routing',
           '/docs/plugin',
-          // '/docs/navigate-between-pages',
+          '/docs/navigate-between-pages',
           '/docs/html-template',
           '/docs/mock',
           '/docs/env-variables',
@@ -70,9 +75,11 @@ function getMenus(opts: { lang?: string; base: '/docs' | '/plugins' }) {
         'title_zh-CN': 'Umi 进阶',
         children: [
           '/docs/load-on-demand',
+          '/docs/fast-refresh',
           '/docs/deployment',
           '/docs/use-umi-ui',
           '/docs/ssr',
+          '/docs/mfsu',
         ],
       },
       {
@@ -100,7 +107,18 @@ function getMenus(opts: { lang?: string; base: '/docs' | '/plugins' }) {
   });
 }
 
-export default {
+const isDev = process.env.NODE_ENV === 'development';
+
+export default defineConfig({
+  ...(isDev
+    ? {
+        webpack5: {},
+        dynamicImport: {},
+        mfsu: {},
+      }
+    : {
+        ssr: {},
+      }),
   favicon: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
   mode: 'site',
   title: 'UmiJS',
@@ -125,8 +143,14 @@ export default {
       path: 'https://github.com/umijs/umi',
     },
   ],
-  exportStatic: {},
-  analytics: {
-    ga: 'UA-149864185-1',
+  polyfill: false,
+  nodeModulesTransform: {
+    type: 'none',
   },
-};
+  exportStatic: {},
+  analytics: isDev
+    ? false
+    : {
+        ga: 'UA-149864185-1',
+      },
+});

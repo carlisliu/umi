@@ -1,6 +1,11 @@
+import { BaseIConfig } from '@umijs/types';
 import { IRoute } from '..';
 
-export interface IConfig {
+type WithFalse<T> = {
+  [P in keyof T]?: T[P] | false;
+};
+
+export interface BaseIConfig {
   singular?: boolean;
   outputPath?: string;
   publicPath?: string;
@@ -10,5 +15,8 @@ export interface IConfig {
   exportStatic?: {
     htmlSuffix?: boolean;
     dynamicRoot?: boolean;
+    supportWin?: boolean;
   };
 }
+
+export type IConfig = WithFalse<BaseIConfig>;

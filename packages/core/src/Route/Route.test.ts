@@ -156,8 +156,23 @@ test('conventional normal', async () => {
           component: '@/pages/index.tsx',
         },
         {
+          path: '/workspace/:name?/edit',
+          exact: true,
+          component: '@/pages/workspace/[name$]/edit.tsx',
+        },
+        {
+          path: '/workspace/:name?/:patch',
+          exact: true,
+          component: '@/pages/workspace/[name$]/[patch].tsx',
+        },
+        {
           path: '/users',
           routes: [
+            {
+              path: '/users/add',
+              exact: true,
+              component: '@/pages/users/add.tsx',
+            },
             {
               path: '/users/:userId',
               exact: true,
@@ -175,6 +190,11 @@ test('conventional normal', async () => {
           path: '/:post',
           exact: true,
           component: '@/pages/[post]/index.tsx',
+        },
+        {
+          path: '/:post/:patch?',
+          exact: true,
+          component: '@/pages/[post]/[patch$].tsx',
         },
       ],
     },

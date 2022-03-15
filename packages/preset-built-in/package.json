@@ -1,10 +1,11 @@
 {
   "name": "@umijs/preset-built-in",
-  "version": "3.0.14",
+  "version": "3.5.21",
   "description": "@umijs/preset-built-in",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
+    "bundled",
     "lib"
   ],
   "repository": {
@@ -24,29 +25,33 @@
     "access": "public"
   },
   "dependencies": {
-    "@types/multer": "1.4.2",
-    "@types/react-router-config": "5.0.1",
-    "@umijs/babel-preset-umi": "3.0.14",
-    "@umijs/bundler-webpack": "3.0.14",
-    "@umijs/renderer-react": "3.0.14",
-    "@umijs/runtime": "3.0.14",
-    "@umijs/server": "3.0.14",
-    "@umijs/types": "3.0.14",
-    "cliui": "6.0.0",
-    "fork-ts-checker-webpack-plugin": "4.1.1",
-    "history-with-query": "4.10.3",
-    "multer": "1.4.2",
-    "path-to-regexp": "^1.7.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router": "5.1.2",
+    "@types/react-router-config": "5.0.2",
+    "@umijs/babel-preset-umi": "3.5.21",
+    "@umijs/bundler-webpack": "3.5.21",
+    "@umijs/deps": "3.5.21",
+    "@umijs/renderer-mpa": "3.5.21",
+    "@umijs/renderer-react": "3.5.21",
+    "@umijs/runtime": "3.5.21",
+    "@umijs/server": "3.5.21",
+    "@umijs/types": "3.5.21",
+    "@umijs/utils": "3.5.21",
+    "ansi-html": "^0.0.7",
+    "core-js": "3.6.5",
+    "core-js-pure": "^3.8.1",
+    "error-stack-parser": "^2.0.6",
+    "es-module-lexer": "0.7.1",
+    "es5-imcompatible-versions": "^0.1.62",
+    "history-with-query": "4.10.4",
+    "html-entities": "^2.1.0",
+    "mime": "1.3.6",
+    "react-refresh": "0.10.0",
+    "react-router": "5.2.0",
     "react-router-config": "5.1.1",
-    "react-router-dom": "5.1.2",
+    "react-router-dom": "5.2.0",
     "regenerator-runtime": "0.13.5",
-    "umi-webpack-bundle-analyzer": "3.5.0",
-    "zlib": "1.0.5"
+    "schema-utils": "^3.0.0"
   },
-  "devDependencies": {
-    "pkg-up": "3.1.0"
+  "peerDependencies": {
+    "react": "16.x || 17.x"
   }
 }

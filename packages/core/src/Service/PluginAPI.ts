@@ -1,11 +1,11 @@
-import assert from 'assert';
 import * as utils from '@umijs/utils';
-import Logger from '../Logger/Logger';
-import Service from './Service';
-import { isValidPlugin, pathToObj } from './utils/pluginUtils';
-import { EnableBy, PluginType, ServiceStage } from './enums';
-import { ICommand, IHook, IPlugin, IPluginConfig, IPreset } from './types';
+import assert from 'assert';
 import Html from '../Html/Html';
+import Logger from '../Logger/Logger';
+import { EnableBy, PluginType, ServiceStage } from './enums';
+import Service from './Service';
+import { ICommand, IHook, IPlugin, IPluginConfig, IPreset } from './types';
+import { isValidPlugin, pathToObj } from './utils/pluginUtils';
 
 interface IOpts {
   id: string;
@@ -40,6 +40,7 @@ export default class PluginAPI {
     id?: string;
     key?: string;
     config?: IPluginConfig;
+    onChange?: any;
     enableBy?: EnableBy | (() => boolean);
   } = {}) {
     const { plugins } = this.service;
@@ -166,7 +167,7 @@ export default class PluginAPI {
       fn ||
       // 这里不能用 arrow function，this 需指向执行此方法的 PluginAPI
       // 否则 pluginId 会不会，导致不能正确 skip plugin
-      function (fn: Function) {
+      function (fn: Function | Object) {
         const hook = {
           key: name,
           ...(utils.lodash.isPlainObject(fn) ? fn : { fn }),
